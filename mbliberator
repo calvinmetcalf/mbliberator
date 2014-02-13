@@ -1,0 +1,19 @@
+var mblib = require('./');
+var program = require('commander');
+var package = require('./package.json');
+
+program.version(package.version)
+  .usage('[options] mbtiles outpath')
+  .option('-c, --connections [n]', 'max number of connections', 50)
+  .parse(process.argv);
+
+mblib(program.args[0], program.args[1], program.connections, function (err, resp) {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  } else {
+    console.log('done');
+    console.log(resp);
+    process.exit(0)
+  }
+});

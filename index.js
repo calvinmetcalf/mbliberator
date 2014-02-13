@@ -8,6 +8,7 @@ module.exports = function(inTile, outPath, max, callback) {
   if (outPath[0] !== '/') {
     outPath = outPath + '/';
   }
+  max = parseInt(max, 10);
   var current = 0;
 
   new mbtiles(inTile, function(err, tiles) {
