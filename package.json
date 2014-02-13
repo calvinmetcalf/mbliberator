@@ -1,0 +1,28 @@
+{
+  "name": "mbliberator",
+  "version": "0.0.0",
+  "description": "liberate your mbtiles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/calvinmetcalf/mbliberator.git"
+  },
+  "keywords": [
+    "mbtiles"
+  ],
+  "author": "Calvin Metcalf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calvinmetcalf/mbliberator/issues"
+  },
+  "homepage": "https://github.com/calvinmetcalf/mbliberator",
+  "dependencies": {
+    "mkdirp": "~0.3.5",
+    "event-stream": "~3.1.0",
+    "tilelivestream": "~1.0.0",
+    "mbtiles": "~0.2.9"
+  }
+}
