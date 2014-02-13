@@ -19,5 +19,5 @@ Usage: mbliberator [options] mbtiles outpath
 TODO
 ====
 
-- comandline
+- tests
 - progress
