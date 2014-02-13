@@ -1,4 +1,4 @@
-var tilelivestream = require('tilelivestream');
+var tilelivestream = require('tilelivestreams');
 var fs = require('fs');
 var es = require('event-stream');
 var mbtiles = require('mbtiles');
@@ -10,7 +10,7 @@ module.exports = function(inTile, outPath, max, callback) {
   }
   var current = 0;
 
-  new mbtiles('inTile', function(err, tiles) {
+  new mbtiles(inTile, function(err, tiles) {
     if (err) {
       return callback(err);
     }
@@ -34,7 +34,7 @@ module.exports = function(inTile, outPath, max, callback) {
             var fullpath, outdata;
             if (data.tile) {
               fullpath = path+data.y+'.png';
-              outdata = date.tile;
+              outdata = data.tile;
             } else if (data.grid) {
               fullpath = path+data.y+".grid.json";
               outdata = JSON.stringify(data.grid); 
@@ -43,20 +43,20 @@ module.exports = function(inTile, outPath, max, callback) {
               if (err) {
                 return cb(err);
               }
-              curent--;
+              current--;
               if (current<max) {
                 tileStream.resume();
               }
             });
           });
-        } if (data.name) {
+        } else if (data.name) {
           fs.writeFile(outPath+"info.json", JSON.stringify(data), {encoding: 'utf8'}, cb);
         }
-      });
+      }));
       writing.on('error', callback);
       writing.on('end', function() {
         callback();
       });
     });
   });
-}
+};

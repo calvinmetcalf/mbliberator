@@ -22,7 +22,7 @@
   "dependencies": {
     "mkdirp": "~0.3.5",
     "event-stream": "~3.1.0",
-    "tilelivestream": "~1.0.0",
+    "tilelivestreams": "~1.1.0",
     "mbtiles": "~0.2.9"
   }
 }
