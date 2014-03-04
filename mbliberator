@@ -6,7 +6,6 @@ var package = require('./package.json');
 
 program.version(package.version)
   .usage('[options] mbtiles outpath')
-  .option('-p, --parallel <n>', 'max number of parallel writes', 50)
   .option('-m, --mbutil [callback]',[
     'mbutil mode, also used to set',
     'the grid callback for mbutil mode,',
@@ -22,7 +21,7 @@ if (program.mbutil === true) {
 if (program.mbutil === 'false') {
   program.mbutil = false;
 }
-mblib(program.args[0], program.args[1], program.connections, program.mbutil, function (err, resp) {
+mblib(program.args[0], program.args[1], program.mbutil, function (err, resp) {
   if (err) {
     console.error(err);
     process.exit(1);

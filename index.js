@@ -1,16 +1,14 @@
 var tilelivestream = require('tilelivestreams');
 var fs = require('fs');
-var es = require('event-stream');
+var through = require('through2');
 var mbtiles = require('mbtiles');
 var mkdirp = require('mkdirp');
 
-module.exports = function(inTile, outPath, max, mbutilMode, callback) {
+module.exports = function(inTile, outPath, mbutilMode, callback) {
   if (outPath[0] !== '/') {
     outPath = outPath + '/';
   }
   var infoName = typeof mbutilMode !== 'undefined' ? 'metadata.json' : "info.json";
-  max = parseInt(max, 10);
-  var current = 0;
   new mbtiles(inTile, function(err, tiles) {
     if (err) {
       return callback(err);
@@ -20,11 +18,7 @@ module.exports = function(inTile, outPath, max, mbutilMode, callback) {
       if (err) {
         return callback(err);
       }
-      var writing = tileStream.pipe(es.map(function (data, cb) {
-        current++;
-        if (current >= max) {
-          tileStream.pause();
-        }
+      var writing = tileStream.pipe(through.obj(function (data, _, cb) {
         var path, outData;
         if (data.tile || data.grid) {
           path = outPath + data.z + '/' + data.x + '/';
@@ -45,15 +39,7 @@ module.exports = function(inTile, outPath, max, mbutilMode, callback) {
               }
               options.encoding = 'utf8';
             }
-            fs.writeFile(fullpath, outdata, options, function (err) {
-              if (err) {
-                return cb(err);
-              }
-              current--;
-              if (current<max) {
-                tileStream.resume();
-              }
-            });
+            fs.writeFile(fullpath, outdata, options, cb);
           });
         } else if (data.name) {
           fs.writeFile(outPath + infoName, JSON.stringify(data), {encoding: 'utf8'}, cb);
