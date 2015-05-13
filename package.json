@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/calvinmetcalf/mbliberator",
   "dependencies": {
-    "mkdirp": "~0.3.5",
-    "tilelivestreams": "~1.1.0",
-    "mbtiles": "~0.2.9",
     "commander": "~2.1.0",
-    "through2": "^0.4.1"
+    "mbtiles": "^0.8.0",
+    "mkdirp": "~0.3.5",
+    "through2": "^0.4.1",
+    "tilelivestreams": "~1.1.0"
   }
 }
