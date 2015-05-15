@@ -33,9 +33,9 @@ module.exports = function(inTile, outPath, mbutilMode, callback) {
             } else if (data.grid) {
               fullpath = path + data.y + ".grid.json";
                if (mbutilMode) {
-                outdata = 'typeof '+ mbutilMode + " === 'function' && " + mbutilMode + '(' + JSON.stringify(data) + ');';
+                outdata = 'typeof '+ mbutilMode + " === 'function' && " + mbutilMode + '(' + JSON.stringify(data.grid) + ');';
               } else {
-                outdata = JSON.stringify(data);
+                outdata = JSON.stringify(data.grid);
               }
               options.encoding = 'utf8';
             }
