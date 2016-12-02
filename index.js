@@ -5,7 +5,7 @@ var mbtiles = require('mbtiles');
 var mkdirp = require('mkdirp');
 
 module.exports = function(inTile, outPath, mbutilMode, callback) {
-  if (outPath[0] !== '/') {
+  if (outPath.slice(-1) !== '/') {
     outPath = outPath + '/';
   }
   var infoName = typeof mbutilMode !== 'undefined' ? 'metadata.json' : "info.json";
